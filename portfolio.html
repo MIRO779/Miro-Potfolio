@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-main: #1f2937;
+            --text-light: #6b7280;
+            --accent-color: #4f46e5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            color: var(--text-main);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Portfolio Wrapper Box */
+        .portfolio-container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        /* Navigation Minimalist Tab Layout */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        nav .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Sections Universal Config */
+        section {
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Hero Profile Presentation Layout */
+        .hero {
+            text-align: center;
+            padding: 20px 0 40px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+        }
+
+        /* Modern Grid System for Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 15px; }
+        }
+
+        .project-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #f3f4f6;
+            color: var(--text-main);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .project-link:hover { text-decoration: underline; }
+
+        /* Compact Clean Contact Section */
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .contact-form .full-width {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 600px) {
+            .contact-form .full-width, .contact-form { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            background: #ffffff;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        .contact-form button {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            grid-column: span 2;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-container">
+        <!-- Minimal Top Nav -->
+        <nav>
+            <div class="logo">MyPortfolio.</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Hi, I'm Amr, a Creator & Developer</h1>
+            <p>I design and build clean, practical web applications that solve daily challenges beautifully.</p>
+            <a href="#projects" class="btn-primary">View My Work</a>
+        </section>
+
+        <!-- Brief About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p style="color: var(--text-light); line-height: 1.6; font-size: 1rem; margin-top: 10px;">
+                I specialize in clean, efficient front-end development, focusing on creating responsive user interfaces with smooth user experiences. I like building lightweight applications that prioritize data privacy, direct functionality, and modern visual aesthetics.
+            </p>
+        </section>
+
+        <!-- Projects Grid Showcase Section -->
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid" style="margin-top: 20px;">
+                
+                <!-- PROJECT 1: Your Monthly Budget Tool -->
+                <div class="project-card">
+                    <div>
+                        <h3>Advanced Monthly Budget Tracker</h3>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3 Grid</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Chart.js Analytics</span>
+                        </div>
+                        <p>A beautiful client-side budget manager featuring automated data persistence across months, localized filtering, CSV report extraction tools, and real-time interactive canvas data graphics charts breakdown tracking metrics safely.</p>
+                    </div>
+                    <!-- Make sure to substitute your live URL here once published -->
+                    <a href="https://budget-calculator99.tiiny.site" target="_blank" class="project-link">Launch Live App &rarr;</a>
+                </div>
+
+                <!-- PROJECT 2: Place holder for your next work -->
+                <div class="project-card">
+                    <div>
+                        <h3>Upcoming Dynamic Web App</h3>
+                        <div class="project-tags">
+                            <span class="tag">UI/UX Design</span>
+                            <span class="tag">Frontend</span>
+                            <span class="tag">Web API</span>
+                        </div>
+                        <p>A placeholder for your next cool creation. This card is perfectly sized and structured to drop in your next web tool, mobile dashboard design layout, or script utility portfolio asset automatically.</p>
+                    </div>
+                    <a href="#" class="project-link">Coming Soon &rarr;</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Direct Contact Box Form Section -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <form class="contact-form" style="margin-top: 20px;" onsubmit="event.preventDefault(); alert('Message simulation sent successfully!');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea class="full-width" rows="4" placeholder="Your Message..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Built with clean HTML & CSS.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
